@@ -9,3 +9,8 @@
     display: flex;
     justify-content: space-between;
 }
+
+.wrapperContent {
+    width: 86%;
+    background-color: deepskyblue;
+}
