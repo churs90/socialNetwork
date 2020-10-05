@@ -8,6 +8,7 @@ const Sidebar = (props) => {
     <nav className={styles.sidebar}>
         <div><NavLink to={"/profile"} activeClassName={styles.activeLink}>Profile</NavLink></div>
         <div><NavLink to={"/dialogs"} activeClassName={styles.activeLink}>Messages</NavLink></div>
+        <div><NavLink to={"/users"} activeClassName={styles.activeLink}>Users</NavLink></div>
         <div><a>News</a></div>
         <div><a>Music</a></div>
         <div><a>Settings</a></div>

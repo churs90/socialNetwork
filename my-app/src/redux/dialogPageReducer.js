@@ -40,14 +40,18 @@ let dialogPageReducer = (state = initialState,action) => {
             let newMessage = {
                 message:state.messageBody
             };
-            state.messagesData.push(newMessage);
-            state.messageBody="";
-            return state;
+            return {
+                ...state,
+                messagesData:[...state.messagesData,newMessage],
+                messageBody:""
+            }
         }
         case ON_CHANGE_MESSAGE_BODY:
         {
-            state.messageBody = action.newMessageBody;
-            return state;
+            return {
+                ...state,
+                messageBody: action.newMessageBody
+            }
         }
         default: return state;
     }

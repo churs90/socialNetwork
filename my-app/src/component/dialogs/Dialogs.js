@@ -2,6 +2,8 @@ import React from 'react';
 import styles from './Dialogs.module.css';
 import DialogItem from "./dialog/Dialog";
 import Message from "./message/Message";
+import {reduxForm} from "redux-form";
+import formComponent from "../form/formComponent";
 
 
 
@@ -16,7 +18,14 @@ const Dialogs = (props) => {
 
     let onChangeMessageBody = (e) => {
         props.onChangeMessageBody(e.target.value)
-    }
+    };
+
+    let onSubmit = (formData) => {
+        alert(formData.dialogField)
+    };
+
+    let ReduxDialogForm = reduxForm({form:"dialog"})(formComponent);
+
   return (
     <div className={styles.dialogs}>
         <div className={styles.dialogsItem}>
@@ -25,12 +34,12 @@ const Dialogs = (props) => {
         <div className={styles.messages}>
             {messagesElements}
             <div>
-                <div><textarea value={props.dialogPage.messageBody} placeholder={"введите текст"} onChange={onChangeMessageBody}></textarea></div>
-                <div><button onClick={onSendMessage}>отправить сообщение</button></div>
+            <ReduxDialogForm onSubmit={onSubmit} name={"dialogField"} maxLengthValue={30} />
             </div>
         </div>
     </div>
     )
 }
+
 
 export default Dialogs;
