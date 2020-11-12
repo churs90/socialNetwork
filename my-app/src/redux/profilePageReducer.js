@@ -1,4 +1,5 @@
 import {profileApi} from "../api/api";
+import {stopSubmit} from "redux-form";
 
 const ON_CHANGE_POST_TEXT = "ON-CHANGE-POST-TEXT";
 const ADD_POST = "ADD-POST";
@@ -7,11 +8,11 @@ const SET_STATUS = "SET-STATUS";
 const UPDATE_STATUS = "UPDATE-STATUS";
 let initialState={
     postsData: [
-        {message: "How are you?", like: 12},
-        {message: "Where are you from?", like: 18},
-        {message: "Where are you from?", like: 23},
-        {message: "Where are you from?", like: 11},
-        {message: "How are you?", like: 122},
+        {id:1, message: "How are you?", like: 12},
+        {id:2, message: "Where are you from?", like: 18},
+        {id:3, message: "Where are you from?", like: 23},
+        {id:4, message: "Where are you from?", like: 11},
+        {id:5, message: "How are you?", like: 122},
     ],
     postText: "",
     userProfile: null,
@@ -112,7 +113,7 @@ export const updateStatus = (status) => {
             }
         })
     }
-}
+};
 
 export const setUserProfile = (userId) => {
     return (dispatch) => {
@@ -120,6 +121,30 @@ export const setUserProfile = (userId) => {
             dispatch(setUserProfileSucces(data));
         });
     }
-}
+};
+
+export const updateUserProfile = (profile) => {
+    return async (dispatch,getState) => {
+        const userId = getState().auth.userData.id;
+        const data = await profileApi.updateUserProfile(profile);
+            if(data.resultCode===0){
+                dispatch(setUserProfile(userId));
+            }else {
+                dispatch(stopSubmit("edit-profile",{_error:data.messages[0]}));
+                return Promise.reject(data.messages[0])
+            };
+    }
+};
+
+export const updatePhoto = (photo) => {
+    return (dispatch,getState) => {
+        const userId = getState().auth.userData.id;
+        profileApi.updatePhoto(photo).then((response) => {
+            if(response.data.resultCode===0) {
+                dispatch(setUserProfile(userId));
+            }
+        });
+    }
+};
 
 export default profilePageReducer;

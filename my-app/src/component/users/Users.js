@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styles from './Users.module.css'
 import * as axios from "axios";
 import userPhoto from '../../assets/images/user.jpg'
@@ -8,15 +8,10 @@ import {isFetching} from "../../redux/userPageReducer";
 
 
 let Users = (props) => {
-    let pagesArr = [];
-    let pagesCounts = Math.ceil(props.usersPage.totalCount / props.usersPage.pageSize);
-    for (let i = 1; i <= pagesCounts; i++) {
-        pagesArr.push(i);
-    }
-
-    let pages = pagesArr.map((p) => <span onClick={() => props.changeCurrentPage(p)}
-                                          className={props.usersPage.currentPage === p ? styles.selectedPage : ""}> {p}</span>);
-
+    let [portionNumber, setPortionNumber] = useState(1);
+    let changePortionNumber = (newPortionNumber) => {
+        setPortionNumber(newPortionNumber)
+    };
 
     let users = props.usersPage.users.map((u) => <div className={styles.usersWrapper}>
         <div className={styles.avaBlock}>
@@ -40,7 +35,7 @@ let Users = (props) => {
                 <p className={styles.status}>{u.status}</p>
             </div>
             <div>
-                <p></p>
+                <p>id: {u.id}</p>
                 <p></p>
             </div>
         </div>
@@ -48,11 +43,36 @@ let Users = (props) => {
     return (
         <div>
             <h1>Users</h1>
-            {pages}
+            <Paginator {...props} portionNumber={portionNumber} changePortionNumber={changePortionNumber}/>
             {users}
+            <Paginator {...props} portionNumber ={portionNumber} changePortionNumber={changePortionNumber}/>
         </div>
     )
 
+};
+
+let Paginator = (props) => {
+    let portionSize = 10;
+
+
+    let leftPortionNumber = (props.portionNumber - 1) * portionSize + 1;
+    let pagesArr = [];
+    let pagesCounts = Math.ceil(props.usersPage.totalCount / props.usersPage.pageSize);
+    let portionCounts = Math.ceil(pagesCounts/portionSize);
+    let rightPortionNumber = props.portionNumber*portionSize;
+    for (let i = 1; i <= pagesCounts; i++) {
+        pagesArr.push(i);
+    }
+
+    let pages = pagesArr.filter(p => p>=leftPortionNumber && p <= rightPortionNumber).map((p) => <span onClick={() => props.changeCurrentPage(p)}
+                                                                                                       className={props.usersPage.currentPage === p ? styles.selectedPage : ""}>{p} </span>);
+    return (
+        <div>
+            {leftPortionNumber > 1 && <button onClick={()=>{props.changePortionNumber(props.portionNumber-1)}}>prev</button>}
+            {pages}
+            {portionCounts > props.portionNumber && <button onClick={()=>{props.changePortionNumber(props.portionNumber+1)}}>next</button>}
+        </div>
+    )
 }
 
 export default Users;

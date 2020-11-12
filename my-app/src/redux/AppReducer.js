@@ -27,10 +27,9 @@ let initializedSucces = () => {
 };
 
 export let initialized = () => {
-    return (dispatch) => {
-        dispatch(setUserData()).then(()=>{
+    return async (dispatch) => {
+        await dispatch(setUserData());
             dispatch(initializedSucces())
-        })
     }
 };
 

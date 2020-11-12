@@ -25,9 +25,9 @@ let initialState = {
         },
         {name: "Jhon", id: 5, ava: "https://www.facenews.ua/media/contentimages/72e5b8273c297356.jpg"},
     ], messagesData: [
-        {message: "hello"},
-        {message: "xxxxxxxxxxxxxxxxxxxxxx"},
-        {message: "qqqqqqqqqqqqqqqqqqqqqq"}
+        {id:1, message: "hello"},
+        {id:2, message: "xxxxxxxxxxxxxxxxxxxxxx"},
+        {id:3, message: "qqqqqqqqqqqqqqqqqqqqqq"}
     ],
     messageBody: ""
 }

@@ -18,7 +18,7 @@ const Posts = (props) => {
     let onSubmit = (formData) => {
         alert(formData.postField)
     }
-    let postsElement = props.profilePage.postsData.map(p => <Post message={p.message} like={p.like} userProfile={props.profilePage.userProfile}/>);
+    let postsElement = props.profilePage.postsData.map(p => <Post key={p.id} message={p.message} like={p.like} userProfile={props.profilePage.userProfile}/>);
 
     return (
         <div className={styles.content}>

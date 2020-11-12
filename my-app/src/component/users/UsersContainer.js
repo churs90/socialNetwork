@@ -13,12 +13,19 @@ import Preloader from "../preloader/Preloader";
 import {userApi} from "../../api/api";
 import {withAuthRedirect} from "../../authRedirect/authRedirect";
 import {compose} from "redux";
+import {getUsersPageProps} from "../../redux/users-selectors";
 
 
 class UsersContainer extends React.Component {
 
     componentDidMount() {
         this.props.getUsers(this.props.usersPage.pageSize,this.props.usersPage.currentPage)
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(this.props === prevProps){
+            this.props.getUsers(this.props.usersPage.pageSize,this.props.usersPage.currentPage)
+        }
     }
 
     changeCurrentPage = (pageNumber) => {
@@ -38,7 +45,7 @@ class UsersContainer extends React.Component {
 
     const mapStateToProps = (state) => {
         return {
-            usersPage:state.usersPage
+            usersPage:getUsersPageProps(state)
         }
     };
 

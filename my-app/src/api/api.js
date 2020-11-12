@@ -30,8 +30,8 @@ export const authApi = {
     getAuth(){
         return instance.get("auth/me").then(response => {return response.data})
     },
-    loginUser(email,password,rememberMe) {
-        return instance.post("auth/login",{email,password,rememberMe}).then(response => {return response.data})
+    loginUser(email,password,rememberMe,captcha = null) {
+        return instance.post("auth/login",{email,password,rememberMe,captcha}).then(response => {return response.data})
     },
     logoutUser() {
         return instance.delete("auth/login").then(response => {return response.data})
@@ -39,15 +39,38 @@ export const authApi = {
 };
 
 export const profileApi = {
-    setUserProfile(userId){
-        return instance.get(`profile/${userId}`).then(response => {return response.data})
+    setUserProfile(userId) {
+        return instance.get(`profile/${userId}`).then(response => {
+            return response.data
+        })
+    },
+    updateUserProfile(profile) {
+        return instance.put(`profile`, profile).then(response => {
+            return response.data
+        })
     },
 
     getStatus(userId) {
-        return instance.get(`profile/status/${userId}`).then(response => {return response.data})
+        return instance.get(`profile/status/${userId}`).then(response => {
+            return response.data
+        })
     },
 
     updateStatus(status) {
-        return instance.put(`profile/status`,{status}).then(response => {return response.data})
+        return instance.put(`profile/status`, {status}).then(response => {
+            return response.data
+        })
+    },
+
+    updatePhoto(photo) {
+        const formData = new FormData();
+        formData.append("image",photo)
+        return instance.put(`profile/photo`, formData,{headers: {'Content-type': 'multipart/form-data'}})
     }
+}
+
+export const securityApi = {
+    getCaptchaUrl(){
+        return instance.get("security/get-captcha-url").then(response => {return response.data})
+    },
 };
