@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/socialNetwork/static/css/main.6c0412a3.chunk.css",
+    "main.js": "/socialNetwork/static/js/main.bef0de71.chunk.js",
+    "main.js.map": "/socialNetwork/static/js/main.bef0de71.chunk.js.map",
+    "runtime-main.js": "/socialNetwork/static/js/runtime-main.f4a284c9.js",
+    "runtime-main.js.map": "/socialNetwork/static/js/runtime-main.f4a284c9.js.map",
+    "static/js/2.f20b9706.chunk.js": "/socialNetwork/static/js/2.f20b9706.chunk.js",
+    "static/js/2.f20b9706.chunk.js.map": "/socialNetwork/static/js/2.f20b9706.chunk.js.map",
+    "index.html": "/socialNetwork/index.html",
+    "precache-manifest.b86f0d7802b6a63eab01c8f4a9ffd1ff.js": "/socialNetwork/precache-manifest.b86f0d7802b6a63eab01c8f4a9ffd1ff.js",
+    "service-worker.js": "/socialNetwork/service-worker.js",
+    "static/css/main.6c0412a3.chunk.css.map": "/socialNetwork/static/css/main.6c0412a3.chunk.css.map",
+    "static/js/2.f20b9706.chunk.js.LICENSE.txt": "/socialNetwork/static/js/2.f20b9706.chunk.js.LICENSE.txt",
+    "static/media/logo-mortal-kombat.png": "/socialNetwork/static/media/logo-mortal-kombat.d178c0d9.png",
+    "static/media/preloader.gif": "/socialNetwork/static/media/preloader.a6486ffc.gif",
+    "static/media/user.jpg": "/socialNetwork/static/media/user.9775c4b8.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f4a284c9.js",
+    "static/js/2.f20b9706.chunk.js",
+    "static/css/main.6c0412a3.chunk.css",
+    "static/js/main.bef0de71.chunk.js"
+  ]
+}
